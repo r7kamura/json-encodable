@@ -1,29 +1,44 @@
-# JsonEncoder
-
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'json_encoder'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install json_encoder
+# JSON::Encodable
+Make a class encodable into JSON format.
 
 ## Usage
+1. Include `JSON::Encodable` module
+2. Call `.property` method with property name
+3. Then the instance will be able to respond to `.to_json` method
 
-TODO: Write usage instructions here
+### #to_json
+```ruby
+class Blog
+  include JSON::Encodable
 
-## Contributing
+  property :id
+  property :title
+  property :username
 
-1. Fork it ( https://github.com/[my-github-username]/json_encoder/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+  def id
+    1
+  end
+
+  def title
+    "wonderland"
+  end
+
+  def username
+    "alice"
+  end
+end
+
+Blog.new.to_json
+#=> '{"id":1,"title":"wonderland","username":"alice"}'
+```
+
+### #as_json(options = {})
+You can also call `.as_json` method with `:except` and `:only` options.
+
+```ruby
+Blog.new.as_json(only: [:id, :username])
+#=> {"id":1,"username":"alice"}
+
+Blog.new.as_json(except: [:username])
+#=> {"id":1,"title":"wonderland"}
+```
