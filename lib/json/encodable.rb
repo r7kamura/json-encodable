@@ -1,7 +1,5 @@
 require "active_support/concern"
-require "active_support/core_ext/hash/reverse_merge"
 require "active_support/core_ext/object/json"
-require "active_support/core_ext/string/inflections"
 require "active_support/json"
 
 require "json/encodable/version"
