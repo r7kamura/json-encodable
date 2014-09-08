@@ -1,1 +1,1 @@
-require "json_encoder/encodable"
+require "json/encodable"
