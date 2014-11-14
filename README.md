@@ -4,7 +4,7 @@ Make a class encodable into JSON format.
 ## Usage
 1. Include `JSON::Encodable` module
 2. Call `.property` method with property name
-3. Then the instance will be able to respond to `.to_json` method
+3. Then the instance will be able to respond to `to_json` method
 
 ### #to_json
 ```ruby
@@ -37,8 +37,8 @@ You can also call `.as_json` method with `:except` and `:only` options.
 
 ```ruby
 Blog.new.as_json(only: [:id, :username])
-#=> {"id":1,"username":"alice"}
+#=> { "id" => 1, "username" => "alice" }
 
 Blog.new.as_json(except: [:username])
-#=> {"id":1,"title":"wonderland"}
+#=> { "id" => 1, "title" => "wonderland" }
 ```
