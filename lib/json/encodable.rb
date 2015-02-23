@@ -58,8 +58,8 @@ module JSON
 
     # @note All Time values will be encoded in ISO 8601 format
     # @param options [Hash] Options for .property_names method
-    # @option options [Array<Symbol>] :except Property names to exclude properties
-    # @option options [Array<Symbol>] :only Property names to filter properties
+    # @option options [Symbol, Array<Symbol>] :except Property names to exclude properties
+    # @option options [Symbol, Array<Symbol>] :only Property names to filter properties
     # @return [Hash{Symbol => Object}] Properties as a key-value pairs Hash
     # @example
     #   {
@@ -70,8 +70,8 @@ module JSON
     #   }
     def properties(options = {})
       names = self.class.property_names
-      names = names - options[:except] if options[:except]
-      names = names & options[:only] if options[:only]
+      names = names - Array(options[:except]) if options[:except]
+      names = names & Array(options[:only]) if options[:only]
       names.inject({}) do |hash, property_name|
         key = property_name
         value = send(property_name)

@@ -51,27 +51,31 @@ describe JSON::Encodable do
       end
     end
 
-    context "with :except option" do
-      before do
-        options[:except] = [:id]
-      end
+    [:id, [:id]].each do |except_value|
+      context "when a #{except_value.class.name.downcase} is given as :except option" do
+        before do
+          options[:except] = except_value
+        end
 
-      it "excludes those properties" do
-        instance.should_not_receive(:id)
-        should be_json_as(
-          title: "wonderland",
-          username: "alice",
-        )
+        it "excludes those properties" do
+          instance.should_not_receive(:id)
+          should be_json_as(
+            title: "wonderland",
+            username: "alice",
+          )
+        end
       end
     end
 
-    context "with :only option" do
-      before do
-        options[:only] = [:id]
-      end
+    [:id, [:id]].each do |only_value|
+      context "when a #{only_value.class.name.downcase} is given as :only option" do
+        before do
+          options[:only] = only_value
+        end
 
-      it "excludes those properties" do
-        should be_json_as(id: 1)
+        it "excludes those properties" do
+          should be_json_as(id: 1)
+        end
       end
     end
   end
