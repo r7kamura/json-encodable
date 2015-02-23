@@ -39,6 +39,6 @@ You can also call `.as_json` method with `:except` and `:only` options.
 Blog.new.as_json(only: [:id, :username])
 #=> { "id" => 1, "username" => "alice" }
 
-Blog.new.as_json(except: [:username])
+Blog.new.as_json(except: :username)
 #=> { "id" => 1, "title" => "wonderland" }
 ```
