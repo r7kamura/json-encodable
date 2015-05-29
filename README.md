@@ -44,7 +44,7 @@ Blog.new.as_json(except: :username)
 ```
 
 ## Advanced
-You can contain any optional meta-information on each properties,
+You can contain any optional metadata on each properties,
 and access to them by `.properties` method.
 
 ```rb
