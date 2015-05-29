@@ -90,7 +90,7 @@ module JSON
 
       # @return [Array<JSON::Encodable::Property>]
       def properties
-        @properies ||= []
+        @properties ||= []
       end
 
       # @param [Symbol] property_name
