@@ -1,3 +1,6 @@
+## 0.1.1
+- Fix bug on inheritance
+
 ## 0.1.0
 - Support optional metadata on each property
 
