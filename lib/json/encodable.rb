@@ -81,7 +81,7 @@ module JSON
     end
 
     module ClassMethods
-      attr_writer :property_names
+      attr_writer :properties
 
       # @return [Array<Symbol>]
       def property_names
