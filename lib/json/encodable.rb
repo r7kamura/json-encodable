@@ -1,7 +1,7 @@
 require "active_support/concern"
 require "active_support/core_ext/object/json"
 require "active_support/json"
-
+require "json/encodable/property"
 require "json/encodable/version"
 
 # Makes an included module encodable into JSON format by putting .as_json method.
@@ -83,23 +83,25 @@ module JSON
     module ClassMethods
       attr_writer :property_names
 
-      # Stores property names, used to build JSON properties
-      # @return [Array]
+      # @return [Array<Symbol>]
       def property_names
-        @property_names ||= []
+        properties.map(&:name)
       end
 
-      # Defines a given property name as a property of the JSON prepresentation its class
-      # @param normal_property_name [Symbol]
-      def property(property_name)
-        property_names << property_name
+      # @return [Array<JSON::Encodable::Property>]
+      def properties
+        @properies ||= []
       end
 
-      # Inherits property_names, while they are not shared between a parent and their children
+      # @param [Symbol] property_name
+      def property(property_name, options = {})
+        properties << ::JSON::Encodable::Property.new(property_name, options)
+      end
+
       # @note Override
       def inherited(child)
         super
-        child.property_names = property_names.clone
+        child.properties = properties.clone
       end
     end
   end

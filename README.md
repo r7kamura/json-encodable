@@ -42,3 +42,21 @@ Blog.new.as_json(only: [:id, :username])
 Blog.new.as_json(except: :username)
 #=> { "id" => 1, "title" => "wonderland" }
 ```
+
+## Advanced
+You can contain any optional meta-information on each properties,
+and access to them by `.properties` method.
+
+```rb
+class Blog
+  include JSON::Encodable
+
+  property :id, type: Integer
+  property :title, type: String
+  property :username, type: String
+end
+
+# Returns an array of `JSON::Encodable::Property` instances.
+# Each instance has `#name` and `#options` methods.
+Blog.properties
+```

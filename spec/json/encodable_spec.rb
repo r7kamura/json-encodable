@@ -9,9 +9,9 @@ describe JSON::Encodable do
     Class.new do
       include JSON::Encodable
 
-      property :id
-      property :title
-      property :username
+      property :id, type: Integer
+      property :title, type: String
+      property :username, type: String
 
       # Dummy name to prevent defining a class in the global namespace
       def self.name
@@ -38,6 +38,24 @@ describe JSON::Encodable do
 
   let(:instance) do
     klass.new
+  end
+
+  describe ".properties" do
+    subject do
+      klass.properties
+    end
+
+    it "returns an Array of JSON::Encodable::Property objects" do
+      should match(
+        array_including(
+          [
+            instance_of(JSON::Encodable::Property),
+            instance_of(JSON::Encodable::Property),
+            instance_of(JSON::Encodable::Property),
+          ],
+        ),
+      )
+    end
   end
 
   describe "#to_json" do
