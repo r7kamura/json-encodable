@@ -40,7 +40,7 @@ describe JSON::Encodable do
     klass.new
   end
 
-  describe ".to_json" do
+  describe "#to_json" do
     context "without any options" do
       it "returns an Object in JSON format" do
         should be_json_as(
